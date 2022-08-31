@@ -31,4 +31,6 @@ Route::get('/status', function () {
     return view('status');
 })->middleware(['auth'])->name('status');
 
+
+
 require __DIR__.'/auth.php';

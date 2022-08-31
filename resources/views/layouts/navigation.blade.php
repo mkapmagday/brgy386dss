@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
                         {{ __('Document Status') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
+                        {{ __('Live Chat') }}
+                    </x-nav-link>
                     @endif
 
                 </div>
@@ -83,12 +86,19 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->email_verified_at==NULL)
+                   
+            @else
             <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
                 {{ __('Document Request') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('status')" :active="request()->routeIs('status')">
                 {{ __('Document Status') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
+                {{ __('Live Chat') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
