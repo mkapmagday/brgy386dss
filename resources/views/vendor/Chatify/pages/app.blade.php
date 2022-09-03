@@ -1,10 +1,6 @@
 @include('Chatify::layouts.headLinks')
 <x-app-layout>
     <x-slot name="header">
-    
-   
-   
-
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView">

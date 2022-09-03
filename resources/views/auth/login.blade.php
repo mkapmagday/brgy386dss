@@ -14,7 +14,6 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('Email')" />
@@ -46,6 +45,7 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+               
 
                 <x-button class="ml-3">
                     {{ __('Log in') }}

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +34,6 @@ Route::get('/status', function () {
 })->middleware(['auth'])->name('status');
 
 
-
+Route::get('/admin', 'Admin\DashboardController@index')->middleware('role:admin');
+Route::get('/resident', 'Seller\DashboardController@index')->middleware('role:seller');
 require __DIR__.'/auth.php';

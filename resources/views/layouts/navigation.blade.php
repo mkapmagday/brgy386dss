@@ -14,10 +14,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
-                    @if (Auth::user()->email_verified_at==NULL)
-                   
-                    @else
+                    </x-nav-link>                   
                     <x-nav-link :href="route('request')" :active="request()->routeIs('request')">
                     {{ __('Document Request') }}
                     </x-nav-link>
@@ -27,8 +24,6 @@
                     <x-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
                         {{ __('Live Chat') }}
                     </x-nav-link>
-                    @endif
-
                 </div>
             </div>
 
@@ -37,8 +32,8 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->name }} </div>
-                            @if (Auth::user()->email_verified_at!=NULL)
+                            <div>{{ Auth::user()->name ?? 'None' }} </div>
+                            @if (Auth::user()->email_verified_at ?? 'None')
                             <x-verification-logo class="w-5 h-5 fill-current text-gray-500" />
                             @else
                             <a href="{{ url('/verify-email') }}" :active="request()->routeIs('verify-email')">
@@ -86,9 +81,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if (Auth::user()->email_verified_at==NULL)
-                   
-            @else
+
             <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
                 {{ __('Document Request') }}
             </x-responsive-nav-link>
@@ -98,14 +91,13 @@
             <x-responsive-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
                 {{ __('Live Chat') }}
             </x-responsive-nav-link>
-            @endif
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name ?? 'None'}}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? 'None' }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
