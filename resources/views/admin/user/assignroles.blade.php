@@ -1,18 +1,20 @@
 <x-app-layout>
     <x-slot name=header>
-    
-                        {{$role}}
-                        @if ($user->role)
-                            @foreach ($user->role as $user_role)
-                                <form class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md" method="POST"
-                                    action="{{ route('admin.users.roles.remove', [$user->id, $user_role->id]) }}"
+  
+
+    @if ($user->roles)
+        @foreach ($user->roles as $user_role)
+        <form  method="POST"
+                                    action="{{ route('user.removeRole', [$user->id, $user_role->id]) }}"
                                     onsubmit="return confirm('Are you sure?');">
                                     @csrf
-                                    @method('DELETE')
+                                    @method('delete')
                                     <button type="submit">{{ $user_role->name }}</button>
                                 </form>
-                            @endforeach
-                        @endif
+        @endforeach
+    @endif
+
+
 
         <form method="POST" action="{{ route('user.assignRole', $user->id) }}">
                             @csrf

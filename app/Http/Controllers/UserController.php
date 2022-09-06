@@ -68,7 +68,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $role = Role::all();
-        return view('admin.user.assignroles',compact('user','role'));
+        $userRole = $user->getRoleNames();
+        return view('admin.user.assignroles',compact('user','role','userRole'));
     }
     public function assignRole(Request $request, User $user)
     {

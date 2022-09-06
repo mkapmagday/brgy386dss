@@ -39,4 +39,5 @@ Route::get('/status', function () {
 Route::resource('admin/user', UserController::class)->middleware(['auth','role:admin']);
 Route::resource('admin/role', RoleController::class)->middleware(['auth','role:admin']);
 Route::post('/user/{user}/role',[UserController::class, 'assignRole'])->name('user.assignRole');
+Route::delete('/user/{user}/role/{role}',[UserController::class,'removeRole'])->name('user.removeRole');
 require __DIR__.'/auth.php';
