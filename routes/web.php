@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +28,15 @@ Route::get('/dashboard', function () {
 
 Route::get('/request', function () {
     return view('request');
-})->middleware(['auth'])->name('request');
+})->middleware(['auth','role:resident'])->name('request');
 
 
 Route::get('/status', function () {
     return view('status');
-})->middleware(['auth'])->name('status');
+})->middleware(['auth','role:resident'])->name('status');
 
 
-Route::get('/admin', 'Admin\DashboardController@index')->middleware('role:admin');
-Route::get('/resident', 'Seller\DashboardController@index')->middleware('role:seller');
+Route::resource('admin/user', UserController::class)->middleware(['auth','role:admin']);
+Route::resource('admin/role', RoleController::class)->middleware(['auth','role:admin']);
+Route::post('/user/{user}/role',[UserController::class, 'assignRole'])->name('user.assignRole');
 require __DIR__.'/auth.php';

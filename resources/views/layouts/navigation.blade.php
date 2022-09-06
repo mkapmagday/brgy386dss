@@ -14,13 +14,24 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>                   
+                    </x-nav-link>                
+                    @hasrole('resident')   
                     <x-nav-link :href="route('request')" :active="request()->routeIs('request')">
                     {{ __('Document Request') }}
                     </x-nav-link>
                     <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
                         {{ __('Document Status') }}
                     </x-nav-link>
+                    @endhasrole('resident')   
+                    @hasrole('admin')
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('users')">
+                    {{ __('Users') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('role.index')" :active="request()->routeIs('roles')">
+                        {{ __('Roles') }}
+                    </x-nav-link>
+                    @endhasrole
+
                     <x-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
                         {{ __('Live Chat') }}
                     </x-nav-link>
@@ -81,13 +92,22 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-
+            @hasrole('resident')
             <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
                 {{ __('Document Request') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('status')" :active="request()->routeIs('status')">
                 {{ __('Document Status') }}
             </x-responsive-nav-link>
+            @endhasrole
+            @hasrole('admin')
+                    <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('users')">
+                    {{ __('Users') }}
+                    </x-nav-link>
+                    <x-responsive-nav-link :href="route('role.index')" :active="request()->routeIs('roles')">
+                        {{ __('Roles') }}
+                    </x-nav-link>
+                    @endhasrole
             <x-responsive-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">
                 {{ __('Live Chat') }}
             </x-responsive-nav-link>

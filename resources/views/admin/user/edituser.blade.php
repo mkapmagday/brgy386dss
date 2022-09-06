@@ -3,48 +3,33 @@
 </head>
 <!-- Latest compiled and minified CSS -->
 <x-slot name="header">
+                
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <form method="POST" action="{{ route('user.store') }}">
-
+        <form method="POST" action="{{ route('user.update', $user->id) }}">
         @csrf
-
+        @method('put')
         <!-- Name -->
         <div style="padding-top: 0px;">
             <table>
                 <tr>
                     <td><x-label for="name" :value="__('Name')" /></td>
                     <td>&nbsp;</td>
-                    <td><x-input id="name" type="text" name="name" :value="old('name')" required autofocus /></td>
+                    <td><x-input id="name" type="text" name="name" :value="$user->name" required autofocus /></td>
                 </tr>
+               
                 <tr>
                     <td><x-label for="email" :value="__('Email')" /></td>
                     <td>&nbsp;</td>
-                    <td><x-input id="email" type="email" name="email" :value="old('email')" required /></td>
+                    <td><x-input id="email" type="email" name="email" :value="$user->email" required /></td>
                 </tr>
-                <tr>
-                    <td><x-label for="password" :value="__('Password')" /></td>
-                    <td>&nbsp;</td>
-                    <td><x-input id="password"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" /></td>
-                </tr>
-                <tr>
-                    <td><x-label for="password_confirmation" :value="__('Confirm Password')" /></td>
-                    <td>&nbsp;</td>
-                    <td><x-input id="password_confirmation" 
-                            type="password"
-                            name="password_confirmation" required /></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><button onclick="return confirm('Do you want to Create? ')" type="submit" style="float: right;">Create</button></td>
-                </tr>
-
-            </table>
             
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><button onclick="return confirm('Do you want to Update? ')" type="submit" style="float: right;">Update</button></td>
+                </tr>
+            </table>
    
         </div>
     </form>
@@ -70,7 +55,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{$user->name}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{$user->email}}</td>
                                 <td class="px-6 py-4 text-sm">
-                                    <a href=" {{ route('user.show',$user->id) }}" type="submit">Roles</button>
+                                    <a href=" {{ route('role.index',$user->id) }}" type="submit">Roles</button>
                                 </td>
                                 <td class="px-6 py-4 text-sm">
                                     <a href="{{ route('user.edit',$user->id) }}" class="m-2 p-2 bg-blue-400 rounded">Edit</a>
