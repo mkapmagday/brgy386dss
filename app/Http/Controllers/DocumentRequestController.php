@@ -7,6 +7,7 @@ use App\Models\DocumentRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use League\CommonMark\Node\Block\Document;
 use Symfony\Component\Console\Input\Input;
 
 class DocumentRequestController extends Controller
@@ -58,9 +59,11 @@ class DocumentRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DocumentRequest $docres, DocumentList $document)
     {
-        //
+        $docres = DocumentRequest::all();
+        $document = DocumentList::all();
+        return view('resident.user.status',compact('docres','document'));
     }
 
     /**
