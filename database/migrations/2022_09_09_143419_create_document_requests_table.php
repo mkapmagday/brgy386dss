@@ -18,6 +18,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('document_id')->constrained('document_lists');
+            $table->string('lname');
+            $table->string('fname');
+            $table->string('mname');
+            $table->string('address');
+            $table->string('purpose');
+            $table->enum('status',['pending','approved','for claiming','claimed'])->default('pending');
         });
     }
 

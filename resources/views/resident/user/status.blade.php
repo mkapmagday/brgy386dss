@@ -18,6 +18,7 @@
                           @foreach(App\Models\DocumentList::all() as $document)
                             @if($docres->document_id == $document->id)
                             <td scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">{{$document->document_name}}</td>
+                            <td scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">{{$docres->status}}</td>
                             @endif
                           @endforeach
                         @endif

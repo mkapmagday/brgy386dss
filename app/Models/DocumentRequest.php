@@ -10,7 +10,14 @@ class DocumentRequest extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'document_id','user_id'
+        'document_id',
+        'user_id',
+        'lname',
+        'fname',
+        'mname',
+        'address',
+        'purpose',
+        'status',
     ];
     public function getDocumentList()
     {
