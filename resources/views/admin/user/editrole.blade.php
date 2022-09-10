@@ -62,7 +62,7 @@
                                             @csrf
                                             @method('delete')
                                         <button onclick="return confirm('Do you want to delete? ')" type="submit">Delete</button>
-                                        </form>
+                                    </form>
                                     </td>
                                 </form>
                                 </tr>

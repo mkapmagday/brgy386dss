@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name=header>
-  
-
+    <h1>Username: {{$user->name}}</h1>
+    <h1>User Email: {{$user->email}}</h1>
     @if ($user->roles)
         @foreach ($user->roles as $user_role)
-        <form  method="POST"
+        <form class="px-4 py-2 bg-red-500  rounded-md" method="POST"
                                     action="{{ route('user.removeRole', [$user->id, $user_role->id]) }}"
                                     onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('delete')
                                     <button type="submit">{{ $user_role->name }}</button>
-                                </form>
+        </form>
         @endforeach
     @endif
 

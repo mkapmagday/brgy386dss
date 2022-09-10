@@ -16,12 +16,18 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>                
                     @hasrole('resident')   
-                    <x-nav-link :href="route('request')" :active="request()->routeIs('request')">
-                    {{ __('Document Request') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
-                        {{ __('Document Status') }}
-                    </x-nav-link>
+                        @if (Auth::user()->email_verified_at != NULL)
+                            <x-nav-link :href="route('request')" :active="request()->routeIs('request')">
+                                {{ __('Document Request') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
+                                {{ __('Document Status') }}
+                            </x-nav-link>                    
+                        @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('VERIF')">
+                            {{ __('VERIFY YOUR ACCOUNT FIRST!!!') }}
+                        </x-nav-link>                      
+                        @endif
                     @endhasrole('resident')   
                     @hasrole('admin')
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('users')">
@@ -44,7 +50,7 @@
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             <div>{{ Auth::user()->name ?? 'None' }} </div>
-                            @if (Auth::user()->email_verified_at ?? 'None')
+                            @if (Auth::user()->email_verified_at != NULL)
                             <x-verification-logo class="w-5 h-5 fill-current text-gray-500" />
                             @else
                             <a href="{{ url('/verify-email') }}" :active="request()->routeIs('verify-email')">
@@ -93,12 +99,18 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @hasrole('resident')
-            <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
-                {{ __('Document Request') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('status')" :active="request()->routeIs('status')">
-                {{ __('Document Status') }}
-            </x-responsive-nav-link>
+
+            @if (Auth::user()->email_verified_at != NULL)
+                <h1>VERIFY YOUR ACCOUNT FIRST</h1>
+            @else
+                <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
+                    {{ __('Document Request') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('status')" :active="request()->routeIs('status')">
+                    {{ __('Document Status') }}
+                </x-responsive-nav-link>
+            @endif
+            
             @endhasrole
             @hasrole('admin')
                     <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('users')">

@@ -3,11 +3,9 @@
 </head>
 <!-- Latest compiled and minified CSS -->
 <x-slot name="header">
-
-
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <form method="POST" action="{{ route('user.store') }}">
+                    <form method="POST" action="{{ route('documentlist.store') }}">
 
         @csrf
 
@@ -15,30 +13,11 @@
         <div style="padding-top: 0px;">
             <table>
                 <tr>
-                    <td><x-label for="name" :value="__('Name')" /></td>
+                    <td><x-label for="document_name" :value="__('Name')" /></td>
                     <td>&nbsp;</td>
-                    <td><x-input id="name" type="text" name="name" :value="old('name')" required autofocus /></td>
+                    <td><x-input id="document_name" type="text" name="document_name"/></td>
                 </tr>
-                <tr>
-                    <td><x-label for="email" :value="__('Email')" /></td>
-                    <td>&nbsp;</td>
-                    <td><x-input id="email" type="email" name="email" :value="old('email')" required /></td>
-                </tr>
-                <tr>
-                    <td><x-label for="password" :value="__('Password')" /></td>
-                    <td>&nbsp;</td>
-                    <td><x-input id="password"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" /></td>
-                </tr>
-                <tr>
-                    <td><x-label for="password_confirmation" :value="__('Confirm Password')" /></td>
-                    <td>&nbsp;</td>
-                    <td><x-input id="password_confirmation" 
-                            type="password"
-                            name="password_confirmation" required /></td>
-                </tr>
+                
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -58,7 +37,6 @@
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Id</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Name</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Email</th>
                             <th scope="col" colspan="2" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Action</th>
                         </tr>
                         </thead>
@@ -66,26 +44,24 @@
                         <tr>
                         </tr>
 
-                            @foreach (App\Models\User::all() as $user)
+                            @foreach (App\Models\DocumentList::all() as $document)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{$user->id}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{$user->name}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{$user->email}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$document->id}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$document->document_name}}</td>
                                 <td class="px-6 py-4 text-sm">
-                                    <a href=" {{ route('user.show',$user->id) }}" type="submit">Roles</button>
+                                    <a href="{{ route('documentlist.edit',$document->id) }}" class="m-2 p-2 bg-blue-400 rounded">Edit</a>
                                 </td>
                                 <td class="px-6 py-4 text-sm">
-                                    <a href="{{ route('user.edit',$user->id) }}" class="m-2 p-2 bg-blue-400 rounded">Edit</a>
-                                </td>
-                                <td class="px-6 py-4 text-sm">
-                                    <form action="{{ route('user.destroy',$user->id) }}" method="POST">
+                                    <form action="{{ route('documentlist.destroy',$document->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                     <button onclick="return confirm('Do you want to delete? ')" type="submit">Delete</button>
                                     </form>
                                 </td>
-                            </form>
                             </tr>
+                            
+                
+                            </form>
                             @endforeach                         
                         </tbody>
                     </table>

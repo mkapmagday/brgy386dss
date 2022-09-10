@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DocumentList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -71,6 +72,7 @@ class UserController extends Controller
         $userRole = $user->getRoleNames();
         return view('admin.user.assignroles',compact('user','role','userRole'));
     }
+    
     public function assignRole(Request $request, User $user)
     {
         if ($user->hasRole($request->role)) {
@@ -129,9 +131,7 @@ class UserController extends Controller
     
     public function destroy($id)
     {
-        //
-        $user = User::find($id);
-        $user->delete();
+        DocumentList::destroy($id);
         return back();
     }
 }
