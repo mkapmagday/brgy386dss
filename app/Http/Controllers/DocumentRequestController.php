@@ -85,7 +85,8 @@ class DocumentRequestController extends Controller
      */
     public function edit($id)
     {
-        //
+        $docres = DocumentRequest::find($id);
+        return view('admin.user.editdocumentrequest',compact('docres'));    
     }
 
     /**
@@ -95,9 +96,32 @@ class DocumentRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showReq(){
+        $docres = DocumentRequest::all();
+        return view('admin.user.documentrequest',compact('docres'));
+    }
+
     public function update(Request $request, $id)
     {
-        //
+        $docres = DocumentRequest::find($id);
+        $user_id = Auth::id();
+        $documentlist_id = $request->input('document_list');
+        $lname = $request->input('lname');
+        $fname = $request->input('fname');
+        $mname = $request->input('mname');
+        $address = $request->input('address');
+        $purpose = $request->input('purpose');
+
+        $docres->update([
+            'document_list' => $documentlist_id,
+            'lname' => $lname,
+            'fname' => $fname,
+            'mname' => $mname,
+            'address' => $address,        
+            'purpose' => $purpose,
+        ]);
+
+        return view('admin.user.documentrequest');  
     }
 
     /**
@@ -108,6 +132,7 @@ class DocumentRequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $docres = DocumentRequest::find($id)->delete();
+        return back();
     }
 }

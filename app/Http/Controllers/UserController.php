@@ -131,7 +131,7 @@ class UserController extends Controller
     
     public function destroy($id)
     {
-        DocumentList::destroy($id);
+        User::destroy($id);
         return back();
     }
 }

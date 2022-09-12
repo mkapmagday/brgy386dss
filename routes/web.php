@@ -29,11 +29,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
+Route::get('/documentreq', function (){
+    return view('admin/user/documentrequest');
+})->middleware(['auth']);
 
 
-Route::get('/request',[DocumentRequestController::class,'index'])->middleware(['auth','role:resident'])->name('request');
-Route::post('/request/create',[DocumentRequestController::class,'store'])->name('documentrequest.store');
+Route::get('/request',[DocumentRequestController::class,'index'])->middleware(['auth','role:resident'])->name('request.index');
+Route::post('/request/create',[DocumentRequestController::class,'store'])->middleware(['auth','role:resident'])->name('documentrequest.store');
 Route::get('/status',[DocumentRequestController::class,'show'])->middleware(['auth','role:resident'])->name('status');
+
+Route::get('/request/status/',[DocumentRequestController::class,'showReq'])->middleware(['auth','role:admin'])->name('documentrequest.showreq');
+Route::get('/status/edit/{id}',[DocumentRequestController::class,'edit'])->middleware(['auth','role:admin'])->name('status.edit');
+Route::get('/status/update/{id}',[DocumentRequestController::class,'update'])->middleware(['auth','role:admin'])->name('documentrequest.update');
+Route::delete('/status/delete/{id}',[DocumentRequestController::class,'destroy'])->middleware(['auth','role:admin'])->name('documentrequest.destroy');
+
 
 
 Route::get('/documentlist',[DocumentListController::class,'index']);

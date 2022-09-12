@@ -17,7 +17,7 @@
                     </x-nav-link>                
                     @hasrole('resident')   
                         @if (Auth::user()->email_verified_at != NULL)
-                            <x-nav-link :href="route('request')" :active="request()->routeIs('request')">
+                            <x-nav-link :href="route('request.index')" :active="request()->routeIs('request')">
                                 {{ __('Document Request') }}
                             </x-nav-link>
                             <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
@@ -35,6 +35,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('role.index')" :active="request()->routeIs('roles')">
                         {{ __('Roles') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('documentrequest.showReq')" :active="request()->routeIs('request')">
+                        {{ __('Requests') }}
                     </x-nav-link>
                     @endhasrole
 
