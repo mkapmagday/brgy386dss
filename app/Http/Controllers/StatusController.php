@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DocumentRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -45,8 +47,13 @@ class StatusController extends Controller
      */
     public function show($id)
     {
-        //
+        $docres = DocumentRequest::find($id);
+        $date = Carbon::now();
+        $month = $date->format('F');
+
+        return view('document\templates\brgyclearance',compact('docres','date','month'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

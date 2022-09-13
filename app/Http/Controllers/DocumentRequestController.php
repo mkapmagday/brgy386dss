@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DocumentRequestStatus;
 use App\Models\DocumentList;
 use App\Models\DocumentRequest;
 use App\Models\User;
@@ -51,6 +52,7 @@ class DocumentRequestController extends Controller
         $mname = $request->input('mname');
         $address = $request->input('address');
         $purpose = $request->input('purpose');
+      
 
         DocumentRequest::create([
             'user_id' => Auth::id(),
@@ -60,6 +62,7 @@ class DocumentRequestController extends Controller
             'mname' => $mname,
             'address' => $address,
             'purpose' => $purpose,
+
         ]);
         return back();  
     }
@@ -70,7 +73,7 @@ class DocumentRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(DocumentRequest $docres, DocumentList $document)
+    public function show(DocumentRequest $docres, DocumentList $document, DocumentRequestStatus $status)
     {
         $docres = DocumentRequest::all();
         $document = DocumentList::all();
@@ -111,6 +114,7 @@ class DocumentRequestController extends Controller
         $mname = $request->input('mname');
         $address = $request->input('address');
         $purpose = $request->input('purpose');
+        $status = $request->input('status');
 
         $docres->update([
             'document_list' => $documentlist_id,
@@ -119,6 +123,7 @@ class DocumentRequestController extends Controller
             'mname' => $mname,
             'address' => $address,        
             'purpose' => $purpose,
+            'status' => $status,
         ]);
 
         return view('admin.user.documentrequest');  
