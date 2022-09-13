@@ -17,14 +17,16 @@
                     </x-nav-link>                
                     @hasrole('resident')   
                         @if (Auth::user()->email_verified_at != NULL)
-                            <x-nav-link :href="route('request.index')" :active="request()->routeIs('request')">
-                                {{ __('Document Request') }}
-                            </x-nav-link>
-                            <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
-                                {{ __('Document Status') }}
-                            </x-nav-link>                    
+                        <x-nav-link :href="route('request.index')" :active="request()->routeIs('request')">
+                            {{ __('Request') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('status')" :active="request()->routeIs('status')">
+                            {{ __('Status') }}
+                        </x-nav-link>
+
+                                            
                         @else
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('VERIF')">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('verify')">
                             {{ __('VERIFY YOUR ACCOUNT FIRST!!!') }}
                         </x-nav-link>                      
                         @endif
@@ -106,12 +108,7 @@
             @if (Auth::user()->email_verified_at != NULL)
                 <h1>VERIFY YOUR ACCOUNT FIRST</h1>
             @else
-                <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
-                    {{ __('Document Request') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('status')" :active="request()->routeIs('status')">
-                    {{ __('Document Status') }}
-                </x-responsive-nav-link>
+            
             @endif
             
             @endhasrole
