@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Node\Block\Document;
 use Symfony\Component\Console\Input\Input;
+use App\Notification\EmailNotification;
+use App\Notifications\EmailNotification as NotificationsEmailNotification;
+use Illuminate\Notifications\Notification as NotificationsNotification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
+use Notification;
+
 
 class DocumentRequestController extends Controller
 {
@@ -73,7 +79,7 @@ class DocumentRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(DocumentRequest $docres, DocumentList $document, DocumentRequestStatus $status)
+    public function show(DocumentRequest $docres, DocumentList $document)
     {
         $docres = DocumentRequest::all();
         $document = DocumentList::all();
@@ -106,8 +112,8 @@ class DocumentRequestController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
         $docres = DocumentRequest::find($id);
-        $user_id = Auth::id();
         $documentlist_id = $request->input('document_list');
         $lname = $request->input('lname');
         $fname = $request->input('fname');
@@ -125,7 +131,8 @@ class DocumentRequestController extends Controller
             'purpose' => $purpose,
             'status' => $status,
         ]);
-
+      
+        
         return view('admin.user.documentrequest');  
     }
 
