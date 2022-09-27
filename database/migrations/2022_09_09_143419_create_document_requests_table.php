@@ -21,8 +21,18 @@ return new class extends Migration
             $table->string('lname');
             $table->string('fname');
             $table->string('mname');
-            $table->string('address');
-            $table->string('purpose');
+            $table->string('pnum');
+            $table->string('address')->nullable();
+            $table->date('bdate')->nullable();
+            $table->string('years')->nullable();
+            $table->string('months')->nullable();
+            $table->string('municipality')->nullable();
+            $table->string('vdate')->nullable();
+            $table->string('age')->nullable();
+            $table->string('representative')->nullable();
+            $table->string('purpose')->nullable();
+            $table->string('reason')->nullable();
+            $table->string('relation')->nullable();
             $table->enum('status',['pending','approved','for claiming','claimed'])->default('pending');
         });
     }

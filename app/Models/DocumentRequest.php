@@ -15,9 +15,32 @@ class DocumentRequest extends Model
         'lname',
         'fname',
         'mname',
+        'status',
+        'pnum',
+        'bdate',
+        'years',
+        'months',
+        'municipality',
+        'vdate',
+        'age',
+        'representative',
         'address',
         'purpose',
-        'status',
+        'relation',
+        'reason',
+    ];
+    protected $nullable = [
+        'bdate',
+        'years',
+        'months',
+        'municipality',
+        'vdate',
+        'age',
+        'representative',
+        'address',
+        'purpose',
+        'relation',
+        'reason',
     ];
     public function getDocumentList()
     {

@@ -35,6 +35,9 @@ Route::get('/documentreq', function (){
     return view('admin/user/documentrequest');
 })->middleware(['auth']);
 
+Route::get('/test', function(){
+    return view('test');
+});
 
 Route::get('/request',[DocumentRequestController::class,'index'])->middleware(['auth','role:resident'])->name('request.index');
 Route::post('/request/create',[DocumentRequestController::class,'store'])->middleware(['auth','role:resident'])->name('documentrequest.store');

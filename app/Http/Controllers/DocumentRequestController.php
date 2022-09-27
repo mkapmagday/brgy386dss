@@ -30,7 +30,9 @@ class DocumentRequestController extends Controller
         $request -> all();
         $users = User::find($id);
         $document = DocumentList::all();
+
         return view('resident.user.request', compact('users','id','request','document'));
+
     }
 
     /**
@@ -56,9 +58,21 @@ class DocumentRequestController extends Controller
         $lname = $request->input('lname');
         $fname = $request->input('fname');
         $mname = $request->input('mname');
+        $pnum = $request->input('pnum');
+
+        $bdate = $request->input('bdate');
+        $years = $request->input('years');
+        $months = $request->input('months');
+        $municipality = $request->input('municipality');
+        $vdate = $request->input('vdate');
+        $age = $request->input('age');
+        $representative = $request->input('representative');
+        $relation = $request->input('relation');
         $address = $request->input('address');
         $purpose = $request->input('purpose');
-      
+        $reason = $request->input('reason');
+
+        //dd($request->input());
 
         DocumentRequest::create([
             'user_id' => Auth::id(),
@@ -66,8 +80,19 @@ class DocumentRequestController extends Controller
             'lname' => $lname,
             'fname' => $fname,
             'mname' => $mname,
+            'pnum' => $pnum,
+
+            'bdate' => $bdate,
+            'years' => $years,
+            'months' => $months,
+            'municipality' => $municipality,
+            'vdate' => $vdate,
+            'age' => $age,
+            'representative' => $representative,
+            'relation' => $relation,
             'address' => $address,
             'purpose' => $purpose,
+            'reason' => $reason,
 
         ]);
         return back();  
@@ -121,16 +146,19 @@ class DocumentRequestController extends Controller
         $address = $request->input('address');
         $purpose = $request->input('purpose');
         $status = $request->input('status');
+        $pnum = $request->input('pnum');
 
         $docres->update([
             'document_list' => $documentlist_id,
             'lname' => $lname,
             'fname' => $fname,
             'mname' => $mname,
+            'pnum' => $pnum,
             'address' => $address,        
             'purpose' => $purpose,
             'status' => $status,
         ]);
+        
       
         
         return view('admin.user.documentrequest');  

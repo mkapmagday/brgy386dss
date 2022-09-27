@@ -42,6 +42,15 @@
                         </tr>
                         <tr>
                             <td>
+                                <x-label for="pnum" :value="__('Phone Number')" />
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <x-input id="pnum" type="text" name="pnum" :value="$docres->pnum" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <x-label for="address" :value="__('Address')" />
                             </td>
                             <td>&nbsp;</td>
@@ -66,15 +75,15 @@
                                 &nbsp;
                             </td>
                             <td>
-                            <select required name="status" id="status" class="form-control">
-                            @foreach(\App\Enums\DocumentRequestStatus::cases() as $status)
-                                <option value="{{ $status->value }}">{{ $status->name }}</option>
-                            @endforeach
-                            </select>
+                                <select required name="status" id="status" :value="{{ $docres->status }}" class="form-control">
+                                    @foreach(\App\Enums\DocumentRequestStatus::cases() as $status)
+                                    <option value="{{ $status->value }}">{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
                             </td>
-                       
+
                         </tr>
-                        
+
 
                         <tr>
                             <td>&nbsp;</td>
@@ -85,7 +94,7 @@
                     </table>
                 </div>
             </form>
-            
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -99,7 +108,7 @@
                             <th scope="row" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">DOCUMENT STATUS</th>
                             <th scope="row" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider" style="column-span: 3;">Actions
                         </tr>
-                    @foreach (App\Models\DocumentRequest::all() as $docres)
+                        @foreach (App\Models\DocumentRequest::all() as $docres)
                         <tr>
                             <td scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">{{$docres->user_id}}</td>
                             <td scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">{{$docres->document_id}}</td>
@@ -129,7 +138,7 @@
                             </td>
                             @endif
                             @endforeach
-                    @endforeach
+                            @endforeach
                         </tr>
 
                     </table>
