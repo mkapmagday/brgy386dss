@@ -45,6 +45,10 @@
                             </td>
                             <td>&nbsp;</td>
                             <td>
+                                <select id="country_code">
+                                    <option value="">Select Country</option>
+                                    <option value="ph">PHILIPPINES</option>
+                                </select>
                                 <x-input id="pnum" type="text" name="pnum" />
                             </td>
                         </tr>
@@ -172,6 +176,13 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
 <script type='text/javascript'>
+    $("#country_code").change(function()
+    {
+        if ($(this).val() == "ph"){
+            document.getElementById("pnum").value ="63";
+            console.log(document.getElementById("pnum").value)
+        }
+    });
     $(function() {
         //Get the selected value
         console.log($("#document_list").val());

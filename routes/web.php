@@ -5,6 +5,7 @@ use App\Http\Controllers\DocumentListController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use App\Models\DocumentRequest;
@@ -38,6 +39,8 @@ Route::get('/documentreq', function (){
 Route::get('/test', function(){
     return view('test');
 });
+
+Route::get('/sms',[SmsController::class,'index']);
 
 Route::get('/request',[DocumentRequestController::class,'index'])->middleware(['auth','role:resident'])->name('request.index');
 Route::post('/request/create',[DocumentRequestController::class,'store'])->middleware(['auth','role:resident'])->name('documentrequest.store');

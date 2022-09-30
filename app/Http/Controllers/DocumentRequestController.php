@@ -12,6 +12,7 @@ use League\CommonMark\Node\Block\Document;
 use Symfony\Component\Console\Input\Input;
 use App\Notification\EmailNotification;
 use App\Notifications\EmailNotification as NotificationsEmailNotification;
+use Illuminate\Notifications\Facades\Vonage;
 use Illuminate\Notifications\Notification as NotificationsNotification;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Notification;
@@ -157,6 +158,14 @@ class DocumentRequestController extends Controller
             'address' => $address,        
             'purpose' => $purpose,
             'status' => $status,
+        ]);
+    
+        Vonage::message()->send([
+            'to' => $pnum,
+            'from' => 'sender',
+            'text' => 'from BRGY 386 this is to inform you about your document status: '.$status.' Thank you for using our website',
+         
+            
         ]);
         
       
