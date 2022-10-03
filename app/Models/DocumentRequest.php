@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentRequest extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $fillable = [
         'document_id',
         'user_id',
@@ -41,6 +40,9 @@ class DocumentRequest extends Model
         'purpose',
         'relation',
         'reason',
+    ];
+    protected $casts = [
+        'created_at' => 'datetime',
     ];
     public function getDocumentList()
     {

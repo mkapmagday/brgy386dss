@@ -7,10 +7,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Error;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
+use PhpParser\Node\Stmt\TryCatch;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -23,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::paginate(5);
         return view('admin.user.index', compact('users'));
     }
 
@@ -71,7 +73,8 @@ class UserController extends Controller
     {
         $role = Role::all();
         $userRole = $user->getRoleNames();
-        return view('admin.user.assignroles',compact('user','role','userRole'));
+        $users = User::paginate(5);
+        return view('admin.user.assignroles',compact('user','role','userRole','users'));
     }
     
     public function assignRole(Request $request, User $user)
@@ -103,7 +106,8 @@ class UserController extends Controller
     public function edit($id)
     {   
         $user = User::find($id);
-        return view('admin.user.edituser',compact('user'));
+        $users = User::paginate(5);
+        return view('admin.user.edituser',compact('user','users'));
 
     }
 
@@ -132,7 +136,13 @@ class UserController extends Controller
     
     public function destroy($id)
     {
-        User::destroy($id);
-        return back();
+        try{
+            User::destroy($id);
+            return back();
+        }
+        catch(\Illuminate\Database\QueryException){
+            return back()->with('notification','error');
+        }
+
     }
 }

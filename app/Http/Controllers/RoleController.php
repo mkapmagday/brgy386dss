@@ -20,10 +20,12 @@ class RoleController extends Controller
         Role::create($validated);
         return redirect()->back();
     }
-    public function edit(Role $role, User $user)
+    public function edit( Role $role, User $user)
     {
+        $role;
+        $showRoles = Role::all();
         view('admin.user.editrole', compact('user','role'));
-        return view('admin.user.editrole', compact('user','role'));
+        return view('admin.user.editrole', compact('user','role','showRoles'));
     }
     public function update(Request $request, Role $role)
     {

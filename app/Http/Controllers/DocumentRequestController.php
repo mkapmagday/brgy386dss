@@ -121,7 +121,9 @@ class DocumentRequestController extends Controller
     public function edit($id)
     {
         $docres = DocumentRequest::find($id);
-        return view('admin.user.editdocumentrequest',compact('docres'));    
+        $docres1 = DocumentRequest::paginate(5);
+        $doclist = DocumentList::paginate(5);
+        return view('admin.user.editdocumentrequest',compact('docres','doclist','docres1'));    
     }
 
     /**
@@ -132,45 +134,76 @@ class DocumentRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showReq(){
+        $docres1 = DocumentRequest::paginate(5);
+        $doclist = DocumentList::paginate(5);
+        return view('admin.user.documentrequest',compact('docres1','doclist'));
+    }
+    public function showStatus(){
         $docres = DocumentRequest::all();
-        return view('admin.user.documentrequest',compact('docres'));
+        return view('admin.user.documentstatus',compact('docres'));
     }
 
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        $doclist = DocumentList::paginate(5);
         $docres = DocumentRequest::find($id);
+        $docres1 = DocumentRequest::paginate(5);
         $documentlist_id = $request->input('document_list');
         $lname = $request->input('lname');
         $fname = $request->input('fname');
         $mname = $request->input('mname');
-        $address = $request->input('address');
-        $purpose = $request->input('purpose');
-        $status = $request->input('status');
         $pnum = $request->input('pnum');
 
+        $bdate = $request->input('bdate');
+        $years = $request->input('years');
+        $months = $request->input('months');
+        $municipality = $request->input('municipality');
+        $vdate = $request->input('vdate');
+        $age = $request->input('age');
+        $representative = $request->input('representative');
+        $relation = $request->input('relation');
+        $address = $request->input('address');
+        $purpose = $request->input('purpose');
+        $reason = $request->input('reason');
+        $status = $request->input('status');
         $docres->update([
             'document_list' => $documentlist_id,
             'lname' => $lname,
             'fname' => $fname,
             'mname' => $mname,
             'pnum' => $pnum,
-            'address' => $address,        
+            'bdate' => $bdate,
+            'years' => $years,
+            'months' => $months,
+            'municipality' => $municipality,
+            'vdate' => $vdate,
+            'age' => $age,
+            'representative' => $representative,
+            'relation' => $relation,
+            'address' => $address,
             'purpose' => $purpose,
-            'status' => $status,
+            'reason' => $reason,
+            'status' => $status
         ]);
+        try{
+            Vonage::message()->send([
+                'to' => $pnum,
+                'from' => 'sender',
+                'text' => 'from BRGY 386 this is to inform you about your document status: '.$status.' Thank you for using our website',             
+            ]);
+            return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+
+        }catch(\Vonage\Client\Exception\Request){
+            return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+
+        }
     
-        Vonage::message()->send([
-            'to' => $pnum,
-            'from' => 'sender',
-            'text' => 'from BRGY 386 this is to inform you about your document status: '.$status.' Thank you for using our website',
-         
-            
-        ]);
+       
         
-      
+        return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+  
         
-        return view('admin.user.documentrequest');  
     }
 
     /**

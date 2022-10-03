@@ -41,6 +41,7 @@
                     <x-nav-link :href="route('documentrequest.showReq')" :active="request()->routeIs('request')">
                         {{ __('Requests') }}
                     </x-nav-link>
+                    
                     @endhasrole
 
                     <x-nav-link :href="route('chatify')" :active="request()->routeIs('chatify')">

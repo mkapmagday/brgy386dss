@@ -34,6 +34,8 @@ return new class extends Migration
             $table->string('reason')->nullable();
             $table->string('relation')->nullable();
             $table->enum('status',['pending','approved','for claiming','claimed'])->default('pending');
+            $table->timestamps();
+
         });
     }
 
