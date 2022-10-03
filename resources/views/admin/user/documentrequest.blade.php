@@ -203,7 +203,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{$docres->user_id}}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{$docres->lname}}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{$docres->fname}}</td>
-                            @foreach($doclist as $document)
+                            @foreach($doclist1 as $document)
                             @if($docres->document_id == $document->id)
                             <td class="px-6 py-4 whitespace-nowrap">{{$document->document_name}}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{$docres->status}}</td>
@@ -234,9 +234,9 @@
                         </tr>
                         @endforeach
                     </table>
-                    {{ $doclist->links() }}
-
                 </div>
+                {{ $doclist->links() }}
+
             </div>
         </div>
     </div>

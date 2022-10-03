@@ -36,7 +36,7 @@
                     @hasrole('resident')
                     
                     <h1>Total Number Of Request: </h1>
-                    @foreach($docres as $docres)
+                    @foreach($docres1 as $docres)
                     @if($loop->last)
                     {{$loop->count}}
                     @endif
@@ -151,7 +151,7 @@ canvas {
       );
       const docresClaimedChart = new Chart(
         document.getElementById('docresClaimedChart'),
-        config1
+        config2
       );
   
 </script>

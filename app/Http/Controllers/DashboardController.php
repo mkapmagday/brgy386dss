@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index(DocumentRequest $docres)
     {
         $id = Auth::user()->id;
-        $docres = DocumentRequest::where('user_id',$id)->get();
+        $docres1 = DocumentRequest::where('user_id',$id)->get();
         $pending = DocumentRequest::where('user_id',$id)->where('status','pending',)->get();
         $approved = DocumentRequest::where('user_id',$id)->where('status','approved')->get();
         $for_claiming = DocumentRequest::where('user_id',$id)->where('status','for_claiming')->get();
@@ -63,7 +63,7 @@ class DashboardController extends Controller
         $labels2 = $months2;
         $data2 = $monthCount2;
 
-             return view('dashboard', compact('docres','pending','approved','for_claiming','claimed','labels','data','labels1','data1','labels2','data2'));
+             return view('dashboard', compact('docres1','pending','approved','for_claiming','claimed','labels','data','labels1','data1','labels2','data2'));
     }
 
     /**

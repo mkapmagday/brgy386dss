@@ -136,7 +136,8 @@ class DocumentRequestController extends Controller
     public function showReq(){
         $docres1 = DocumentRequest::paginate(5);
         $doclist = DocumentList::paginate(5);
-        return view('admin.user.documentrequest',compact('docres1','doclist'));
+        $doclist1 = DocumentList::all();
+        return view('admin.user.documentrequest',compact('docres1','doclist1','doclist'));
     }
     public function showStatus(){
         $docres = DocumentRequest::all();
@@ -147,6 +148,7 @@ class DocumentRequestController extends Controller
     {
         $user = User::find($id);
         $doclist = DocumentList::paginate(5);
+        $doclist1 = DocumentList::all();
         $docres = DocumentRequest::find($id);
         $docres1 = DocumentRequest::paginate(5);
         $documentlist_id = $request->input('document_list');
@@ -192,16 +194,16 @@ class DocumentRequestController extends Controller
                 'from' => 'sender',
                 'text' => 'from BRGY 386 this is to inform you about your document status: '.$status.' Thank you for using our website',             
             ]);
-            return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+            return view('admin.user.documentrequest',compact('doclist','docres','docres1','doclist1'));  
 
         }catch(\Vonage\Client\Exception\Request){
-            return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+            return view('admin.user.documentrequest',compact('doclist','docres','docres1','doclist1'));  
 
         }
     
        
         
-        return view('admin.user.documentrequest',compact('doclist','docres','docres1'));  
+        return view('admin.user.documentrequest',compact('doclist','docres','docres1','doclist1'));  
   
         
     }
